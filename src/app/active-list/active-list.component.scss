@@ -1,0 +1,18 @@
+.list-container {
+  display: flex;
+  padding: 1rem 2rem;
+  flex-direction: column;
+
+  .item-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .name {
+    margin-left: 8px;
+  }
+
+  .number {
+    margin-right: 8px;
+  }
+}

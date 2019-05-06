@@ -1,0 +1,9 @@
+<div class="list-container">
+  <div *ngFor="let volunteer of volunteers; let i=index" class="item-wrapper">
+    <h3 class="number">{{i + 1}}</h3>
+    <button mat-icon-button color="warn" (click)="onRemove(volunteer.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <h3 class="name">{{volunteer.name}} {{volunteer.surname}}</h3>
+  </div>
+</div>

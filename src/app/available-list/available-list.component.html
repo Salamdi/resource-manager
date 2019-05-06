@@ -1,0 +1,7 @@
+<div class="list-container">
+  <app-available-item
+    (toggleItem)="onToggleItem($event)"
+    *ngFor="let volunteer of volunteers"
+    [daymask]="daymask"
+    [volunteer]="volunteer"></app-available-item>
+</div>

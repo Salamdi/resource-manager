@@ -1,0 +1,20 @@
+.day-container {
+  height: 100vh;
+
+  .links-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .content {
+    display: flex;
+  }
+
+  .available-list-wrapper,
+  .active-list-wrapper {
+    flex: 1;
+    height: calc(100vh - 36px);
+    overflow-y: auto;
+  }
+}

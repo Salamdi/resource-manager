@@ -1,0 +1,11 @@
+<div class="item-wrapper">
+  <div class="content-container">
+    <h3>{{volunteer.name}} {{volunteer.surname}}</h3>
+    <div class="tags-container">
+      <p class="tag" [class.disabled]="tag.disabled" *ngFor="let tag of tags">{{tag.day}}</p>
+    </div>
+  </div>
+  <div class="checkbox-container">
+    <mat-checkbox (change)="onChange($event)" [checked]="checked"></mat-checkbox>
+  </div>
+</div>

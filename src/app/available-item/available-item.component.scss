@@ -1,0 +1,41 @@
+@import "../app.component.scss";
+
+.item-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 2rem;
+
+  .content-container {
+    flex: 1;
+  }
+
+  .checkbox-container {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:hover {
+    background-color: rgba(0,0,0,.04);
+  }
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .tag {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: mat-color($primary);
+    color: #ffffff;
+    margin: 0 8px 8px 0;
+
+    &.disabled {
+      background-color: #e0e0e0;
+      color: rgba(0,0,0,.87);
+      opacity: 0.4;
+    }
+  }
+}

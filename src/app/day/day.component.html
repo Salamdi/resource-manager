@@ -1,0 +1,24 @@
+<div class="day-container">
+  <div class="links-list">
+    <button
+      mat-button
+      [color]="currentday === day.id ? 'accent' : 'primary'"
+      [routerLink]="['/day', day.id]"
+      *ngFor="let day of days">
+      {{day.day}}
+    </button>
+  </div>
+  <div class="content">
+    <div class="available-list-wrapper">
+      <app-available-list
+        [volunteers]="availableList"
+        [daymask]="daymask"
+        (toggleVolunteer)="onToggleVolunteer($event)"></app-available-list>
+    </div>
+    <div class="active-list-wrapper">
+      <app-active-list
+        (removeItem)="onRemoveItem($event)"
+        [volunteers]="activeList"></app-active-list>
+    </div>
+  </div>
+</div>
