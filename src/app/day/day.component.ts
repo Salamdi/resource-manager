@@ -16,6 +16,7 @@ export class DayComponent implements OnInit {
   public availableList: Array<Volunteer>;
   public activeList: Array<Volunteer>;
   public currentday: number;
+  public currentgender: number;
   public daymask: number;
 
   constructor(
@@ -26,20 +27,21 @@ export class DayComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.pipe(
-      map(params => parseInt(params.get('mask'), 10)),
-      tap(currentday => this.currentday = currentday),
+      map(params => {
+        const currentday = parseInt(params.get('mask'), 10);
+        const currentgender = parseInt(params.get('gender'), 10);
+        this.currentday = currentday;
+        this.currentgender = currentgender;
+        this.checkDay(currentday);
+        return currentday;
+      }),
       map(currentday => currentday - 1),
       map(power => Math.pow(2, power)),
       tap(daymask => this.daymask = daymask),
       mergeMap(daysmask => this.vs.volunteersList(daysmask))
     ).subscribe(list => {
-      this.availableList = list;
-      this.activeList = list.filter(volunteer => volunteer.load & this.daymask)
-      this.days = Array.from(this.adapter.daysMapper.entries())
-        .map(([day, mask]) => {
-          const id = Math.log2(mask) + 1;
-          return { day, id };
-        });
+      this.availableList = list.filter(volunteer => volunteer.gender === this.currentgender);
+      this.activeList = list.filter(volunteer => volunteer.gender === this.currentgender && (volunteer.load & this.daymask));
     });
   }
 
@@ -53,6 +55,23 @@ export class DayComponent implements OnInit {
 
   public onRemoveItem(id: number): void {
     const checked = false;
-    this.onToggleVolunteer({checked, id});
+    this.onToggleVolunteer({ checked, id });
+  }
+
+  private checkDay(currentid: number): void {
+    if (!this.days.length) {
+      this.days = Array.from(this.adapter.daysMapper)
+        .map(([day, mask]) => {
+          const id = Math.log2(mask) + 1;
+          const checked = id === currentid;
+          day = day.split(' ')[0];
+          return { day, id, checked };
+        });
+    } else {
+      this.days = this.days.map(day => {
+        const checked = currentid === day.id;
+        return {...day, checked};
+      })
+    }
   }
 }

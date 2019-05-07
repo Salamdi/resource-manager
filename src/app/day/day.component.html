@@ -1,12 +1,34 @@
 <div class="day-container">
   <div class="links-list">
-    <button
-      mat-button
-      [color]="currentday === day.id ? 'accent' : 'primary'"
-      [routerLink]="['/day', day.id]"
-      *ngFor="let day of days">
-      {{day.day}}
-    </button>
+    <div class="gender-wrapper">
+      <mat-button-toggle-group>
+        <mat-button-toggle
+          [routerLink]="['/day', 1, currentday]"
+          routerLinkActive="active"
+          [disabled]="currentgender === 1">
+          Парни
+        </mat-button-toggle>
+        <mat-button-toggle
+          [routerLink]="['/day', 2, currentday]"
+          routerLinkActive="active"
+          [disabled]="currentgender === 2">
+          Девушки
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="days-wrapper">
+      <mat-button-toggle-group style="overflow: auto;">
+          <mat-button-toggle
+            [routerLink]="['..', day.id]"
+            [disabled]="day.checked"
+            routerLinkActive="active"
+            [value]="day.id"
+            [id]="day.id"
+            *ngFor="let day of days">
+            {{day.day}}
+          </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
   </div>
   <div class="content">
     <div class="available-list-wrapper">

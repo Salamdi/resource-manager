@@ -11,11 +11,13 @@ import {MatChipsModule} from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AvailableListComponent } from './available-list/available-list.component';
 import { AvailableItemComponent } from './available-item/available-item.component';
 import { DayComponent } from './day/day.component';
 import { ActiveListComponent } from './active-list/active-list.component';
+import { GenderComponent } from './gender/gender.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ActiveListComponent } from './active-list/active-list.component';
     AvailableListComponent,
     AvailableItemComponent,
     DayComponent,
-    ActiveListComponent
+    ActiveListComponent,
+    GenderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { ActiveListComponent } from './active-list/active-list.component';
     MatDividerModule,
     MatCheckboxModule,
     MatIconModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
