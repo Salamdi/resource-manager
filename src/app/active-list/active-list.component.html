@@ -1,6 +1,6 @@
 <div class="list-container">
+      <span [matBadge]="volunteers.length" *ngIf="volunteers.length" class="badge"></span>
   <div *ngFor="let volunteer of volunteers; let i=index" class="item-wrapper">
-    <h3 class="number">{{i + 1}}</h3>
     <button mat-icon-button color="warn" (click)="onRemove(volunteer.id)">
       <mat-icon>clear</mat-icon>
     </button>

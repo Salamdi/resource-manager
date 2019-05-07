@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DayComponent } from './day/day.component';
 import { VolunteersResolverService } from './volunteers-resolver.service';
-import { GenderComponent } from './gender/gender.component';
 import { Gender } from './models';
 
 const routes: Routes = [

@@ -5,12 +5,14 @@
         <mat-button-toggle
           [routerLink]="['/day', 1, currentday]"
           routerLinkActive="active"
+          [checked]="currentgender === 1"
           [disabled]="currentgender === 1">
           Парни
         </mat-button-toggle>
         <mat-button-toggle
           [routerLink]="['/day', 2, currentday]"
           routerLinkActive="active"
+          [checked]="currentgender === 2"
           [disabled]="currentgender === 2">
           Девушки
         </mat-button-toggle>
@@ -22,8 +24,6 @@
             [routerLink]="['..', day.id]"
             [disabled]="day.checked"
             routerLinkActive="active"
-            [value]="day.id"
-            [id]="day.id"
             *ngFor="let day of days">
             {{day.day}}
           </mat-button-toggle>
