@@ -3,7 +3,7 @@ import { Volunteer } from './models';
 import { VolunteerAdapterService } from './volunteer-adapter.service';
 import { VOLUNTEERS } from './mock-data';
 import { of, Observable, BehaviorSubject, timer } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +14,28 @@ export class VolunteerService {
 
   constructor(private adapter: VolunteerAdapterService) {
     this._volunteers$ = new BehaviorSubject([]);
+    this._volunteers$.asObservable().subscribe(volunteers => {
+      if (volunteers.length) {
+        this.persist(volunteers);
+      }
+    })
   }
 
   public volunteersList(daymask: number): Observable<Array<Volunteer>> {
     if (!this._volunteers) {
       timer(1400).pipe(
-        map(() => VOLUNTEERS),
-        map(volunteers => this.adapter.adapt(volunteers)),
+        map(_ => localStorage.getItem('volunteers.list')),
+        map(json => json ? JSON.parse(json) : this.adapter.adapt(VOLUNTEERS)),
+        catchError(_ => of(this.adapter.adapt(VOLUNTEERS))), // TODO: add error handler
         tap(volunteers => this._volunteers = volunteers),
       ).subscribe(volunteers => this._volunteers$.next(volunteers));
     }
     return this._volunteers$.asObservable().pipe(
-      map(volunteers => volunteers
-        .filter(volunteer => volunteer.availability & daymask))
+      filter(list => !!list.length),
+      map(volunteers => {
+        return volunteers
+        .filter(volunteer => volunteer.availability & daymask)
+      })
     );
   }
   
@@ -52,5 +61,10 @@ export class VolunteerService {
       return volunteer;
     });
     this._volunteers$.next(this._volunteers);
+  }
+
+  private persist(data: any): void {
+    const json = JSON.stringify(data);
+    localStorage.setItem('volunteers.list', json);
   }
 }
