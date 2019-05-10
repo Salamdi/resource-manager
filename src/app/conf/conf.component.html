@@ -1,0 +1,37 @@
+<div class="container">
+  <form #confForm="ngForm" (ngSubmit)="handleSubmit()" class="conf-form" *ngIf="!list || list.length === 0">
+    <div class="entry-wrapper">
+      <mat-form-field>
+        <input matInput placeholder="ID документа" required name="id" [(ngModel)]="model.id">
+        <mat-hint>Из URL'а докмента</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="entry-wrapper">
+      <mat-form-field>
+        <input matInput placeholder="Название листа" [(ngModel)]="model.sheet" name="sheet">
+        <mat-hint>По умолчанию первый лист</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="entry-wrapper">
+      <mat-form-field>
+        <input matInput placeholder="Диапазон клеток" required [(ngModel)]="model.range" name="range">
+        <mat-hint>В формате A1:Z9</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="entry-wrapper">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!confForm.valid">Импортировать</button>
+    </div>
+  </form>
+  <div *ngIf="list && list.length > 0" class="list-wrapper">
+    <mat-list>
+      <mat-list-item *ngFor="let volunteer of list">
+        <mat-radio-group [(ngModel)]="volunteer.gender">
+          <mat-radio-button [value]="1" style="margin-right: 16px;">М</mat-radio-button>
+          <mat-radio-button [value]="2">Ж</mat-radio-button>
+        </mat-radio-group>
+        <span class="name">{{volunteer.name}} {{volunteer.surname}}</span>
+      </mat-list-item>
+    </mat-list>
+    <button mat-raised-button color="primary" (click)="handleSave()">Сохранить</button>
+  </div>
+</div>

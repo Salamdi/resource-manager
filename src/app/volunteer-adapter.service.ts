@@ -29,9 +29,10 @@ export class VolunteerAdapterService {
       .map<[string, number]>((day, index) => [day, 2 ** index]);
     localStorage.setItem('volunteers.daysMapper', JSON.stringify(week));
     this._daysMapper = new Map(week);
-    return list.map((volunteer, id) => {
-      const [surname, name, number, email, daysList, stringGender] = volunteer;
-      const gender = stringGender === 'male' ? Gender.male : Gender.female;
+    let volunteers = list.map((volunteer, id) => {
+      volunteer = volunteer.map(field => field.trim());
+      const [surname, name, number, email, daysList] = volunteer;
+      const gender = surname.charCodeAt(surname.length - 1) === 1072 ? Gender.female : Gender.male;
       const availability = daysList.split(', ').reduce((mask, curr) => mask + this._daysMapper.get(curr), 0);
       const load = 0;
       return {
@@ -45,5 +46,11 @@ export class VolunteerAdapterService {
         id
       };
     });
+    volunteers = volunteers.filter((volunteer, i) => {
+      const tail = volunteers.slice(i + 1);
+      const clone = tail.find(volClone => `${volClone.surname}${volClone.name}` === `${volunteer.surname}${volunteer.name}`);
+      return !clone;
+    });
+    return volunteers;
   }
 }

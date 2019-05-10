@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .entry-wrapper {
+    margin: 16px;
+  }
+
+  .name {
+    margin-left: 24px;
+  }
+
+  .list-wrapper {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
