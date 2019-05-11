@@ -34,4 +34,13 @@
     height: calc(100vh - 100px);
     overflow-y: auto;
   }
+
+  .process-button-container {
+    display: flex;
+    justify-content: center;
+
+    & > :first-child {
+      margin-right: 16px;
+    }
+  }
 }

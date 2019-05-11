@@ -30,6 +30,10 @@
       </mat-button-toggle-group>
     </div>
   </div>
+  <div class="process-button-container">
+    <button mat-raised-button color="primary" (click)="process()">Распределить</button>
+    <button mat-raised-button color="warn" (click)="reset()">Сбросить</button>
+  </div>
   <div class="content">
     <div class="available-list-wrapper">
       <app-available-list

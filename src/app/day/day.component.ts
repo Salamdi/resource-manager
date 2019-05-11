@@ -74,4 +74,12 @@ export class DayComponent implements OnInit {
       })
     }
   }
+
+  public process(): void {
+    this.vs.processAllVolunteers();
+  }
+
+  public reset(): void {
+    this.vs.reset();
+  }
 }

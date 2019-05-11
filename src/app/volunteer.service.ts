@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Volunteer } from './models';
+import { Volunteer, Gender } from './models';
 import { VolunteerAdapterService } from './volunteer-adapter.service';
 import { of, Observable, BehaviorSubject, timer } from 'rxjs';
 import { map, tap, catchError, filter } from 'rxjs/operators';
@@ -73,5 +73,61 @@ export class VolunteerService {
       }),
       tap(volunteers => this._volunteers = volunteers),
     ).subscribe(volunteers => this._volunteers$.next(volunteers))
+  }
+
+  public processSingleDayVolunteers(): void {
+    this._volunteers = this._volunteers
+      .map(volunteer => {
+        const { availability, load } = volunteer;
+        const power = Math.log2(availability);
+        const singleDay = Number.isInteger(power);
+        const free = !load;
+        if (singleDay && free) {
+          const load = availability;
+          return { ...volunteer, load };
+        }
+        return volunteer;
+      });
+  }
+
+  public processAllVolunteers(): void {
+    this.processSingleDayVolunteers();
+    this.adapter.daysMapper.forEach(mask => {
+      this.fillDay(mask, Gender.male);
+      this.fillDay(mask, Gender.female);
+    });
+    this._volunteers = this._volunteers.map(volunteer => {
+      if (volunteer.load !== 0) {
+        return volunteer;
+      }
+      const load = Array.from(this.adapter.daysMapper.values()).find(mask => !!(volunteer.availability & mask));
+      return {...volunteer, load};
+    })
+    this._volunteers$.next(this._volunteers);
+  }
+
+  private fillDay(mask: number, gender: Gender): void {
+    let n = this._volunteers.filter(volunteer => volunteer.gender === gender && volunteer.load === mask).length;
+    while (n < 10) {
+      // available volunteers
+      const availables = this._volunteers
+        .filter(volunteer =>
+          (volunteer.gender === gender) && (volunteer.availability & mask) && !(volunteer.load & mask))
+        .sort((a, b) => a.load - b.load);
+      // take volunteer least loaded (potentially not loaded yet if load === 0)
+      let candidate = availables[0];
+      // if  no candidate stop looping
+      if (!candidate) {
+        break;
+      }
+      // add load to candidate
+      this.load(candidate.id, mask);
+      n++;
+    }
+  }
+
+  public reset(): void {
+    this._volunteers = this._volunteers.map(volunteer => ({...volunteer, load: 0}));
+    this._volunteers$.next(this._volunteers);
   }
 }

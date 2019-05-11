@@ -6,12 +6,14 @@ import { Gender } from './models';
 import { AuthComponent } from './auth/auth.component';
 import { ConfComponent } from './conf/conf.component';
 import { ConfResolverService } from './conf-resolver.service';
+import { AuthResolverService } from './auth-resolver.service';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthResolverService]
   },
   {
     path: 'conf',
