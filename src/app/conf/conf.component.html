@@ -1,5 +1,5 @@
 <div class="container">
-  <form #confForm="ngForm" (ngSubmit)="handleSubmit()" class="conf-form" *ngIf="!list || list.length === 0">
+  <form #confForm="ngForm" (ngSubmit)="handleSubmit()" class="conf-form" *ngIf="!showList">
     <div class="entry-wrapper">
       <mat-form-field>
         <input matInput placeholder="ID документа" required name="id" [(ngModel)]="model.id">
@@ -22,16 +22,42 @@
       <button mat-raised-button color="primary" type="submit" [disabled]="!confForm.valid">Импортировать</button>
     </div>
   </form>
-  <div *ngIf="list && list.length > 0" class="list-wrapper">
-    <mat-list>
-      <mat-list-item *ngFor="let volunteer of list">
-        <mat-radio-group [(ngModel)]="volunteer.gender">
-          <mat-radio-button [value]="1" style="margin-right: 16px;">М</mat-radio-button>
-          <mat-radio-button [value]="2">Ж</mat-radio-button>
-        </mat-radio-group>
-        <span class="name">{{volunteer.name}} {{volunteer.surname}}</span>
-      </mat-list-item>
-    </mat-list>
-    <button mat-raised-button color="primary" (click)="handleSave()">Сохранить</button>
+  <div *ngIf="showList" class="list-wrapper">
+    <div class="query-search">
+      <mat-form-field class="example-full-width">
+        <input #searchInput matInput placeholder="найти по имени или фамилии" (input)="handleSearch(searchInput.value)">
+      </mat-form-field>
+    </div>
+    <div class="list">
+      <mat-list>
+        <mat-list-item *ngFor="let volunteer of list">
+          <button mat-icon-button color="warn" (click)="handleRemove(volunteer.id)">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <mat-radio-group [(ngModel)]="volunteer.gender">
+            <mat-radio-button [value]="1" style="margin-right: 16px;">М</mat-radio-button>
+            <mat-radio-button [value]="2">Ж</mat-radio-button>
+          </mat-radio-group>
+          <span class="name">{{volunteer.surname}} {{volunteer.name}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="back-button" *ngIf="prevPage">
+      <button mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="forward-button" *ngIf="!prevPage">
+      <button mat-icon-button color="primary" (click)="handleSave()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+    <div class="refresh-list-button">
+      <button mat-fab matTooltip="загрузить новый список" (click)="refreshList()">
+        <mat-icon>
+          refresh
+        </mat-icon>
+      </button>
+    </div>
   </div>
 </div>

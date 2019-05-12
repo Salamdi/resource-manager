@@ -7,10 +7,11 @@ import { AuthComponent } from './auth/auth.component';
 import { ConfComponent } from './conf/conf.component';
 import { ConfResolverService } from './conf-resolver.service';
 import { AuthResolverService } from './auth-resolver.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: AuthComponent,
     pathMatch: 'full',
     canActivate: [AuthResolverService]
@@ -27,6 +28,15 @@ const routes: Routes = [
     resolve: {
       volunteers: VolunteersResolverService
     }
+  },
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

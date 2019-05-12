@@ -26,7 +26,7 @@ export class VolunteerService {
     });
   }
 
-  public volunteersList(daymask: number): Observable<Array<Volunteer>> {
+  public volunteersList$(daymask: number): Observable<Array<Volunteer>> {
     return this._volunteers$.asObservable().pipe(
       map(volunteers => {
         return volunteers
@@ -128,6 +128,21 @@ export class VolunteerService {
 
   public reset(): void {
     this._volunteers = this._volunteers.map(volunteer => ({...volunteer, load: 0}));
+    this._volunteers$.next(this._volunteers);
+  }
+
+  public unprocessed$(): Observable<boolean> {
+    return this._volunteers$.asObservable().pipe(map(list => list.every(volunteer => volunteer.load === 0)))
+  }
+
+  public removeVolunteer(id: number): void {
+    this._volunteers = this._volunteers.filter(volunteer => volunteer.id !== id);
+    this._volunteers$.next(this._volunteers);
+  }
+
+  public drop(): void {
+    this._volunteers = [];
+    localStorage.removeItem('volunteers.list');
     this._volunteers$.next(this._volunteers);
   }
 }

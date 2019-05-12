@@ -13,7 +13,7 @@ export class ConfResolverService implements CanActivate {
   constructor(private auth: AuthService, private router: Router, private vs: VolunteerService) { }
 
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.vs.volunteersList(127).pipe(
+    return this.vs.volunteersList$(127).pipe(
       map(list => {
         const can = this.auth.verify() || list.length > 0;
         if (!can) this.router.navigateByUrl('/');

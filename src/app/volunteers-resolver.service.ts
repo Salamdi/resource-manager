@@ -16,7 +16,7 @@ export class VolunteersResolverService implements Resolve<Array<Volunteer>> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<Volunteer> | never> {
-    return this.vs.volunteersList(127).pipe(
+    return this.vs.volunteersList$(127).pipe(
       take(1),
       mergeMap(list => {
         if (list.length) {

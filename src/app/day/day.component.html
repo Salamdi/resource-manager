@@ -31,8 +31,27 @@
     </div>
   </div>
   <div class="process-button-container">
-    <button mat-raised-button color="primary" (click)="process()">Распределить</button>
-    <button mat-raised-button color="warn" (click)="reset()">Сбросить</button>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/conf"
+        [queryParams]="{day: currentday, gender: currentgender}">
+        Редактировать список
+      </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="process()"
+      *ngIf="unprocessed">
+      Распределить
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="reset()"
+      *ngIf="!unprocessed">
+      Сбросить
+    </button>
   </div>
   <div class="content">
     <div class="available-list-wrapper">

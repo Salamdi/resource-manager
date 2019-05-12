@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, EMPTY } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,13 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   public getData(spreadheetId: string, range: string, sheet?: string): Observable<Array<Array<string>>> {
     if (!this.auth.verify()) {
+      this.router.navigateByUrl('/auth');
       return of([]);
     }
     const options = {

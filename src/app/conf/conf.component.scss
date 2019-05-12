@@ -14,6 +14,34 @@
 
   .list-wrapper {
     height: 100%;
+  }
+
+  .list {
     overflow-y: auto;
+    height: calc(100% - 72px);
+  }
+
+  .query-search {
+    display: flex;
+    flex-direction: column;
+    height: 72px;
+  }
+
+  .back-button {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+  }
+
+  .forward-button {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+  }
+
+  .refresh-list-button {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
   }
 }

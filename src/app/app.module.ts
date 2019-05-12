@@ -15,6 +15,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AvailableListComponent } from './available-list/available-list.component';
 import { AvailableItemComponent } from './available-item/available-item.component';
@@ -23,6 +25,8 @@ import { ActiveListComponent } from './active-list/active-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfComponent } from './conf/conf.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import { ConfComponent } from './conf/conf.component';
     ActiveListComponent,
     AuthComponent,
     ConfComponent,
+    NotFoundComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,8 +55,13 @@ import { ConfComponent } from './conf/conf.component';
     MatInputModule,
     MatRadioModule,
     MatListModule,
+    MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [],
+  entryComponents: [
+    DialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

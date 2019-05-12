@@ -31,16 +31,12 @@
   .available-list-wrapper,
   .active-list-wrapper {
     flex: 1;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 136px);
     overflow-y: auto;
   }
 
   .process-button-container {
     display: flex;
-    justify-content: center;
-
-    & > :first-child {
-      margin-right: 16px;
-    }
+    justify-content: space-around;
   }
 }
