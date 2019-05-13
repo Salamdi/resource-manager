@@ -2,24 +2,24 @@
   <form #confForm="ngForm" (ngSubmit)="handleSubmit()" class="conf-form" *ngIf="!showList">
     <div class="entry-wrapper">
       <mat-form-field>
-        <input matInput placeholder="ID документа" required name="id" [(ngModel)]="model.id">
+        <input matInput placeholder="ID документа" required name="id" [(ngModel)]="model.id" [disabled]="fetching">
         <mat-hint>Из URL'а докмента</mat-hint>
       </mat-form-field>
     </div>
     <div class="entry-wrapper">
       <mat-form-field>
-        <input matInput placeholder="Название листа" [(ngModel)]="model.sheet" name="sheet">
+        <input matInput placeholder="Название листа" [(ngModel)]="model.sheet" name="sheet" [disabled]="fetching">
         <mat-hint>По умолчанию первый лист</mat-hint>
       </mat-form-field>
     </div>
     <div class="entry-wrapper">
       <mat-form-field>
-        <input matInput placeholder="Диапазон клеток" required [(ngModel)]="model.range" name="range">
+        <input matInput placeholder="Диапазон клеток" required [(ngModel)]="model.range" name="range" [disabled]="fetching">
         <mat-hint>В формате A1:Z9</mat-hint>
       </mat-form-field>
     </div>
     <div class="entry-wrapper">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!confForm.valid">Импортировать</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!confForm.valid || fetching">Импортировать</button>
     </div>
   </form>
   <div *ngIf="showList" class="list-wrapper">

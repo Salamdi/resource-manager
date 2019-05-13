@@ -25,6 +25,7 @@ export class ConfComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   public prevPage: { day: string, gender: string } | null;
   private _search$ = new BehaviorSubject('');
+  public fetching: boolean;
 
   constructor(
     private vs: VolunteerService,
@@ -38,10 +39,15 @@ export class ConfComponent implements OnInit, OnDestroy {
     this._search$.asObservable().pipe(
       map(query => query.toLowerCase()),
       mergeMap(query => this.vs.volunteersList$(127).pipe(
-        tap(list => this.showList = list.length > 0),
+        tap(list => {
+          this.showList = list.length > 0;
+          if (list.length > 0) {
+            this.fetching = false;
+          }
+        }),
         map(list => list
           .filter(volunteer =>
-            volunteer.name.toLowerCase().includes(query)|| volunteer.surname.toLowerCase().includes(query)))
+            volunteer.name.toLowerCase().includes(query) || volunteer.surname.toLowerCase().includes(query)))
       )),
       takeUntil(this._destroy$)
     ).subscribe(list => this.list = list);
@@ -62,6 +68,7 @@ export class ConfComponent implements OnInit, OnDestroy {
   }
 
   public handleSubmit(): void {
+    this.fetching = true;
     let { id, range, sheet } = this.model;
     id = id.trim();
     range = range.trim();
