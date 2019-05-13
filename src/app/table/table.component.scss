@@ -2,28 +2,34 @@
   font-family: sans-serif;
   font-size: 0.8rem;
 
-  .boys, .girls {
-    display: flex;
+  .padding-container {
+    padding: 16px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
   }
 
   td, th {
     border: 1px solid;
   }
 
-  .table-wrapper {
-    display: flex;
-    width: 280px;
-  }
-
   table {
     border-collapse: collapse;
-    flex: 1;
+    margin: 0 auto;
+  }
 
-    &:not(:first-child) {
-      tr td:first-child,
-      tr th:first-child {
-        border-left:none
-      }
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  @media print {
+    mat-toolbar {
+      display: none;
+    }
+
+    .table-wrapper {
+      overflow-x: initial;
     }
   }
 }

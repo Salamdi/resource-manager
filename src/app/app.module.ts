@@ -17,6 +17,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AvailableListComponent } from './available-list/available-list.component';
 import { AvailableItemComponent } from './available-item/available-item.component';
@@ -59,6 +61,8 @@ import { TableComponent } from './table/table.component';
     MatListModule,
     MatDialogModule,
     MatTooltipModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
   ],
   providers: [],
   entryComponents: [

@@ -1,42 +1,87 @@
 <div class="container">
-  <div class="girls">
-    <table *ngFor="let day of data">
-      <thead>
-        <tr>
-          <th colspan="4">{{day.name}}</th>
-        </tr>
-        <tr>
-          <th>№</th>
-          <th>Фамилия</th>
-          <th>Имя</th>
-          <th>Телефон</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th colspan="4">девушки</th>
-        </tr>
-        <tr *ngFor="let volunteer of day.girls; let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{volunteer.surname}}</td>
-          <td>{{volunteer.name}}</td>
-          <td>{{volunteer.number}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="boys">
-    <div class="table-wrapper" *ngFor="let day of data">
-      <table>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <mat-slide-toggle (change)="togglePhones($event.checked)">Показать номера</mat-slide-toggle>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="padding-container">
+    <div class="table-wrapper">
+      <table *ngIf="!showNumbers">
+        <thead>
+          <tr>
+            <th *ngFor="let day of days" colspan="3">{{day}}</th>
+          </tr>
+          <tr>
+            <ng-container *ngFor="let day of days">
+              <th>№</th>
+              <th>Фамилия</th>
+              <th>Имя</th>
+            </ng-container>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <th colspan="4">парни</th>
+            <th *ngFor="let day of days" colspan="3">парни</th>
           </tr>
-          <tr *ngFor="let volunteer of day.boys; let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{volunteer.surname}}</td>
-            <td>{{volunteer.name}}</td>
-            <td>{{volunteer.number}}</td>
+          <tr *ngFor="let row of boys; let i = index">
+            <ng-container *ngFor="let boy of row">
+              <td>{{i + 1}}</td>
+              <td>{{boy.surname}}</td>
+              <td>{{boy.name}}</td>
+            </ng-container>
+          </tr>
+          <tr>
+            <th *ngFor="let day of days" colspan="3">девушки</th>
+          </tr>
+          <tr *ngFor="let row of girls; let i = index">
+            <ng-container *ngFor="let girl of row">
+              <td>{{i + 1}}</td>
+              <td>{{girl.surname}}</td>
+              <td>{{girl.name}}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+      <table *ngIf="showNumbers">
+        <thead>
+          <tr>
+            <th *ngFor="let day of days" colspan="4">{{day}}</th>
+          </tr>
+          <tr>
+            <ng-container *ngFor="let day of days">
+              <th>№</th>
+              <th>Фамилия</th>
+              <th>Имя</th>
+              <th>Телефон</th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th *ngFor="let day of days" colspan="4">парни</th>
+          </tr>
+          <tr *ngFor="let row of boys; let i = index">
+            <ng-container *ngFor="let boy of row">
+              <td>{{i + 1}}</td>
+              <td>{{boy.surname}}</td>
+              <td>{{boy.name}}</td>
+              <td>{{boy.number}}</td>
+            </ng-container>
+          </tr>
+          <tr>
+            <th *ngFor="let day of days" colspan="4">девушки</th>
+          </tr>
+          <tr *ngFor="let row of girls; let i = index">
+            <ng-container *ngFor="let girl of row">
+              <td>{{i + 1}}</td>
+              <td>{{girl.surname}}</td>
+              <td>{{girl.name}}</td>
+              <td>{{girl.number}}</td>
+            </ng-container>
           </tr>
         </tbody>
       </table>
