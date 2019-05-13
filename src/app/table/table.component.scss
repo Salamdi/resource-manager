@@ -1,0 +1,29 @@
+.container {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+
+  .boys, .girls {
+    display: flex;
+  }
+
+  td, th {
+    border: 1px solid;
+  }
+
+  .table-wrapper {
+    display: flex;
+    width: 280px;
+  }
+
+  table {
+    border-collapse: collapse;
+    flex: 1;
+
+    &:not(:first-child) {
+      tr td:first-child,
+      tr th:first-child {
+        border-left:none
+      }
+    }
+  }
+}

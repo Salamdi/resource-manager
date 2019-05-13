@@ -8,6 +8,7 @@ import { ConfComponent } from './conf/conf.component';
 import { ConfResolverService } from './conf-resolver.service';
 import { AuthResolverService } from './auth-resolver.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,14 @@ const routes: Routes = [
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
+  },
+  {
+    path: 'table',
+    component: TableComponent,
+    pathMatch: 'full',
+    resolve: {
+      volunteers: VolunteersResolverService
+    }
   },
   {
     path: '**',

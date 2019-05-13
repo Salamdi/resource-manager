@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="girls">
+    <table *ngFor="let day of data">
+      <thead>
+        <tr>
+          <th colspan="4">{{day.name}}</th>
+        </tr>
+        <tr>
+          <th>№</th>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Телефон</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th colspan="4">девушки</th>
+        </tr>
+        <tr *ngFor="let volunteer of day.girls; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{volunteer.surname}}</td>
+          <td>{{volunteer.name}}</td>
+          <td>{{volunteer.number}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="boys">
+    <div class="table-wrapper" *ngFor="let day of data">
+      <table>
+        <tbody>
+          <tr>
+            <th colspan="4">парни</th>
+          </tr>
+          <tr *ngFor="let volunteer of day.boys; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{volunteer.surname}}</td>
+            <td>{{volunteer.name}}</td>
+            <td>{{volunteer.number}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

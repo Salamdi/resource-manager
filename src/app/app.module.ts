@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfComponent } from './conf/conf.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DialogComponent } from './dialog/dialog.component';
     ConfComponent,
     NotFoundComponent,
     DialogComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

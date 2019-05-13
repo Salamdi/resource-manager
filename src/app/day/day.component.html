@@ -1,4 +1,9 @@
 <div class="day-container">
+  <div class="generate-table-button" *ngIf="!unprocessed">
+    <button mat-fab routerLink="/table" matTooltip="Сгенерировать таблицу">
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
   <div class="links-list">
     <div class="gender-wrapper">
       <mat-button-toggle-group>
