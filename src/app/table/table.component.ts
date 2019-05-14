@@ -30,6 +30,7 @@ export class TableComponent implements OnInit {
   girls: Array<Array<Volunteer>> = [];
   days: Array<string> = [];
   showNumbers = false;
+  message = encodeURI('Ас саляму алейкум');
 
   constructor(
     private route: ActivatedRoute,

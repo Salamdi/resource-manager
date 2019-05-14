@@ -70,7 +70,11 @@
               <td>{{boy.surname}}</td>
               <td>{{boy.name}}</td>
               <td><a href="tel:+{{boy.number}}">{{boy.number}}</a></td>
-              <td><a target="_blank " href="https://wa.me/{{boy.number}}"><img src="assets/whatsapp-icon.svg" alt="whatsapp" class="icon"></a></td>
+              <td>
+                <a target="_blank " href="https://wa.me/{{boy.number}}?text={{message}}">
+                  <img src="assets/whatsapp-icon.svg" alt="whatsapp" class="icon">
+                </a>
+              </td>
             </ng-container>
           </tr>
           <tr>
@@ -82,7 +86,11 @@
               <td>{{girl.surname}}</td>
               <td>{{girl.name}}</td>
               <td><a href="tel:{{girl.number}}">{{girl.number}}</a></td>
-              <td><a target="_blank " href="https://wa.me/{{girl.number}}"><img src="assets/whatsapp-icon.svg" alt="whatsapp" class="icon"></a></td>
+              <td>
+                <a target="_blank " href="https://wa.me/{{girl.number}}?text={{message}}">
+                  <img src="assets/whatsapp-icon.svg" alt="whatsapp" class="icon">
+                </a>
+              </td>
             </ng-container>
           </tr>
         </tbody>
