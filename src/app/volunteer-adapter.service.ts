@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Gender, Volunteer } from './models';
+import { format } from 'src/utils/phone-formatter';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class VolunteerAdapterService {
     this._daysMapper = new Map(week);
     let volunteers = list.map((volunteer, id) => {
       volunteer = volunteer.map(field => field.trim());
-      const [surname, name, number, email, daysList] = volunteer;
+      const [surname, name, unformattedNumber, email, daysList] = volunteer;
+      const number = format(unformattedNumber);
       const gender = surname.charCodeAt(surname.length - 1) === 1072 ? Gender.female : Gender.male;
       const availability = daysList.split(', ').reduce((mask, curr) => mask + this._daysMapper.get(curr), 0);
       const load = 0;

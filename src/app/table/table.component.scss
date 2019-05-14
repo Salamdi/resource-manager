@@ -12,6 +12,8 @@
 
   td, th {
     border: 1px solid;
+    white-space: nowrap;
+    padding: 4px;
   }
 
   table {
@@ -21,6 +23,11 @@
 
   .spacer {
     flex: 1 1 auto;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
   }
 
   @media print {
