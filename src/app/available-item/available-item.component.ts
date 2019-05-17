@@ -4,6 +4,14 @@ import { VolunteerAdapterService } from '../volunteer-adapter.service';
 import { VolunteerService } from '../volunteer.service';
 
 export interface ToggleEvent { checked: boolean; id: number };
+const Shorts = new Map();
+Shorts.set(1, 'пн');
+Shorts.set(2, 'вт');
+Shorts.set(4, 'ср');
+Shorts.set(8, 'чт');
+Shorts.set(16, 'пт');
+Shorts.set(32, 'сб');
+Shorts.set(64, 'вс');
 
 @Component({
   selector: 'app-available-item',
@@ -29,7 +37,7 @@ export class AvailableItemComponent implements OnInit, OnChanges {
         const available = availability & mask;
         if (available) {
           const disabled = load & mask;
-          const day = fullday.split(' ')[0];
+          const day = Shorts.get(mask);
           return [...tags, {day, disabled}];
         }
         return tags;

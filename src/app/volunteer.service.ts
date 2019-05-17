@@ -113,7 +113,11 @@ export class VolunteerService {
       const availables = this._volunteers
         .filter(volunteer =>
           (volunteer.gender === gender) && (volunteer.availability & mask) && !(volunteer.load & mask))
-        .sort((a, b) => a.load - b.load);
+        .sort((a, b) => {
+          const aDays = Array.from(this.adapter.daysMapper).reduce((n, [_, mask]) => (a.load & mask) ? n + 1 : n, 0);
+          const bDays = Array.from(this.adapter.daysMapper).reduce((n, [_, mask]) => (b.load & mask) ? n + 1 : n, 0);
+          return aDays - bDays;
+        });
       // take volunteer least loaded (potentially not loaded yet if load === 0)
       let candidate = availables[0];
       // if  no candidate stop looping

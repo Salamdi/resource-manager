@@ -96,7 +96,6 @@ export class DayComponent implements OnInit, OnDestroy {
     this.dialog.open(DialogComponent)
     .afterClosed()
     .subscribe(result => {
-      console.log(result);
       if (result) {
         this.vs.reset();
       }
