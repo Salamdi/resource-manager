@@ -1,3 +1,6 @@
+$light-green: #d9ead3;
+$dark-green: #b6d7a8;
+
 .container {
   font-family: sans-serif;
   font-size: 0.8rem;
@@ -14,6 +17,15 @@
     border: 1px solid;
     white-space: nowrap;
     padding: 4px;
+  }
+
+  .day-1, .day-3,
+  .day-5, .day-7 {
+    background-color: $light-green;
+  }
+
+  .day-2, .day-4, .day-6 {
+    background-color: $dark-green;
   }
 
   table {
