@@ -21,11 +21,11 @@ $dark-green: #b6d7a8;
 
   .day-1, .day-3,
   .day-5, .day-7 {
-    background-color: $light-green;
+    background-color: $dark-green;
   }
 
   .day-2, .day-4, .day-6 {
-    background-color: $dark-green;
+    background-color: $light-green;
   }
 
   table {
