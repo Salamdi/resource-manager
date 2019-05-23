@@ -26,6 +26,9 @@
     <div class="query-search">
       <mat-form-field class="example-full-width">
         <input #searchInput matInput placeholder="найти по имени или фамилии" (input)="handleSearch(searchInput.value)">
+        <button matSuffix mat-icon-button *ngIf="searchInput.value" (click)="searchInput.value = ''; handleSearch(searchInput.value)">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
     </div>
     <div class="list">
@@ -42,12 +45,12 @@
         </mat-list-item>
       </mat-list>
     </div>
-    <div class="back-button" *ngIf="prevPage">
+    <div class="navigation-button navigation-back" *ngIf="prevPage">
       <button mat-icon-button color="primary" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
-    <div class="forward-button" *ngIf="!prevPage">
+    <div class="navigation-button navigation-forward" *ngIf="!prevPage">
       <button mat-icon-button color="primary" (click)="handleSave()">
         <mat-icon>arrow_forward</mat-icon>
       </button>

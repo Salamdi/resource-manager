@@ -14,6 +14,10 @@
 
   .list-wrapper {
     height: 100%;
+    width: 100%;
+    @media (min-width: 520px) {
+      width: 420px;
+    }
   }
 
   .list {
@@ -25,18 +29,24 @@
     display: flex;
     flex-direction: column;
     height: 72px;
+    width: 60%;
+    margin: 0 auto;
+    @media (min-width: 520px) {
+      width: 100%;
+    }
   }
 
-  .back-button {
+  .navigation-button {
     position: fixed;
     top: 16px;
-    left: 16px;
-  }
 
-  .forward-button {
-    position: fixed;
-    top: 16px;
-    right: 16px;
+    &.navigation-back {
+      left: 16px;
+    }
+
+    &.navigation-forward {
+      right: 16px;
+    }
   }
 
   .refresh-list-button {

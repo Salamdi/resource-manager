@@ -35,7 +35,7 @@ export class VolunteerAdapterService {
       const [surname, name, unformattedNumber, email, daysList] = volunteer;
       const number = format(unformattedNumber);
       const gender = surname.charCodeAt(surname.length - 1) === 1072 ? Gender.female : Gender.male;
-      const availability = daysList.split(', ').reduce((mask, curr) => mask + this._daysMapper.get(curr), 0);
+      const availability = daysList.split(', ').reduce((mask, curr) => mask | this._daysMapper.get(curr), 0);
       const load = 0;
       return {
         name,
